@@ -3,13 +3,26 @@
 import * as path from "path";
 
 const Tail = require('tail').Tail;
-const tail = new Tail(path.join(__dirname, '..', 'server', 'latest.log'));
+const tail = new Tail(path.join(__dirname, '..', 'minecraft', 'logs', 'latest.log'));
+const reStr = /^\[(\d{2}:\d{2}:\d{2})\]\s\[([\w\s]+)\/(\w+)\]:\s(.*)$/gm
 
 export default function () { 
   
   console.log('Listening to latest.log')
 
-  tail.on('line', function(data) {
+  tail.on('line', function(logData) {
+    let re = new RegExp(reStr)
+    let result = re.exec(logData)
+    let data = {}
+
+    if (result.length) {
+      data = {
+        time: result[1],
+        thread: result[2],
+        level: result[3],
+        message: result[4]
+      }
+    }
     console.log(data)
   })
   
