@@ -1,0 +1,3 @@
+- Vue from scratch [https://itnext.io/vuejs-and-webpack-4-from-scratch-part-1-94c9c28a534a]
+- RCON Client [https://github.com/janispritzkau/rcon-clien]
+- Node TypeScipt [https://www.digitalocean.com/community/tutorials/setting-up-a-node-project-with-typescript]
