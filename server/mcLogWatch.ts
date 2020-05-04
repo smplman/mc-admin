@@ -1,12 +1,13 @@
 // https://thisdavej.com/how-to-watch-for-files-changes-in-node-js/
 
-import * as path from "path";
+import * as path from 'path'
+import socketio from 'socket.io'
 
-const Tail = require('tail').Tail;
-const tail = new Tail(path.join(__dirname, '..', 'minecraft', 'logs', 'latest.log'));
+const Tail = require('tail').Tail
+const tail = new Tail(path.join(__dirname, '..', 'minecraft', 'logs', 'latest.log'))
 const reStr = /^\[(\d{2}:\d{2}:\d{2})\]\s\[([\w\s]+)\/(\w+)\]:\s(.*)$/gm
 
-export default function () { 
+export default (socket) => { 
   
   console.log('Listening to latest.log')
 
@@ -24,6 +25,7 @@ export default function () {
       }
     }
     console.log(data)
+    socket.emit('mcLog', data)
   })
   
   tail.on('error', function(error) {

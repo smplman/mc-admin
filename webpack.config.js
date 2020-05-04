@@ -1,10 +1,12 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
+const NodemonPlugin = require('nodemon-webpack-plugin')
 const path = require('path')
 
 const serverConfig = {
   target: 'node',
+  mode: 'development',
   externals: [
     nodeExternals()
   ],
@@ -17,12 +19,6 @@ const serverConfig = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js'
-  },
-  devServer: {
-    hot: true,
-    watchOptions: {
-      poll: true
-    }
   },
   module: {
     rules: [
@@ -37,6 +33,9 @@ const serverConfig = {
   resolve: {
     extensions: [ '.tsx', '.ts', '.js' ],
   },
+  plugins: [
+    new NodemonPlugin(),
+],
 };
 
 const clientConfig = {
@@ -49,6 +48,12 @@ const clientConfig = {
     filename: 'app.js'
   },
   devtool: 'source-map',
+  devServer: {
+    hot: true,
+    watchOptions: {
+      poll: true
+    }
+  },
   module: {
     rules: [
       // Vue components

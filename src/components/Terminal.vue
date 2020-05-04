@@ -1,12 +1,9 @@
 <template>
-  <div>
-    <h2>RCON Terminal</h2>
-    <div class="terminal" @click="onFocus">
-      <pre class="console-output" ref="output"><output>{{consoleOutput}}</output></pre>
-      <div class="prompt">
-        <span>{{this.prompt}}</span>
-        <input @keydown.enter="onSubmit" @keyup.up="onHistory" @keyup.down="onHistory" ref="prompt" class="prompt" type="text" />
-      </div>
+  <div class="terminal" @click="onFocus">
+    <pre class="console-output" ref="output"><output>{{consoleOutput}}</output></pre>
+    <div class="prompt">
+      <span>{{this.prompt}}</span>
+      <input @keydown.enter="onSubmit" @keyup.up="onHistory" @keyup.down="onHistory" ref="prompt" class="prompt" type="text" />
     </div>
   </div>
 </template>
